@@ -19,7 +19,7 @@ jobs:
         run: flutter format --set-exit-if-changed lib
 
       - name: Analyze
-        run: flutter analyze lib --no-fatal-infos --no-fatal-warnings
+        run: flutter analyze lib
 
-      - name: Run tests
-        run: flutter test --no-pub --coverage --test-randomize-ordering-seed random
+      # - name: Run Tests
+      #   run: flutter test --no-pub --coverage --test-randomize-ordering-seed random
