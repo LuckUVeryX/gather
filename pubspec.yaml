@@ -13,6 +13,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   flutter:
     sdk: flutter
+  flutter_hooks: ^0.18.2+1
   flutter_native_splash: ^2.0.4
   flutter_svg: ^1.0.3
   freezed_annotation: ^1.1.0
@@ -29,6 +30,7 @@ dev_dependencies:
 flutter:
   assets:
     - assets/app/
+    - assets/loading/
   
   fonts:
     - family: SFProRounded
@@ -51,7 +53,6 @@ flutter:
           weight: 800
         - asset: assets/fonts/SF-Pro-Rounded-Black.ttf
           weight: 900
-      
   
   uses-material-design: true
 
