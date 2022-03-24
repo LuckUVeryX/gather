@@ -16,21 +16,18 @@ import 'package:flutter/material.dart' as _i3;
 import '../core/loading/loading_page.dart' as _i1;
 
 class AppRouter extends _i2.RootStackRouter {
-  AppRouter([_i3.GlobalKey<_i3.NavigatorState>? navigatorKey])
-      : super(navigatorKey);
+  AppRouter([_i3.GlobalKey<_i3.NavigatorState>? navigatorKey]) : super(navigatorKey);
 
   @override
   final Map<String, _i2.PageFactory> pagesMap = {
     LoadingRoute.name: (routeData) {
-      return _i2.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i1.LoadingPage());
+      return _i2.MaterialPageX<dynamic>(routeData: routeData, child: const _i1.LoadingPage());
     }
   };
 
   @override
   List<_i2.RouteConfig> get routes => [
-        _i2.RouteConfig('/#redirect',
-            path: '/', redirectTo: '/loading', fullMatch: true),
+        _i2.RouteConfig('/#redirect', path: '/', redirectTo: '/loading', fullMatch: true),
         _i2.RouteConfig(LoadingRoute.name, path: '/loading')
       ];
 }
