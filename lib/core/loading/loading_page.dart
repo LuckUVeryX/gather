@@ -29,7 +29,7 @@ class LoadingIndicator extends StatelessWidget {
           padding: const EdgeInsets.only(top: _space + _logoSize),
           child: Text(
             'gather',
-            style: textTheme.displaySmall?.copyWith(fontWeight: FontWeight.w800, color: theme.cardColor),
+            style: textTheme.displaySmall?.copyWith(fontWeight: FontWeight.w800, color: theme.colorScheme.onPrimary),
           ),
         ),
         const Padding(
