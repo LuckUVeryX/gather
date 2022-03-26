@@ -18,26 +18,21 @@ import '../main.dart' as _i1;
 import 'app_router.dart' as _i3;
 
 class AppRouter extends _i4.RootStackRouter {
-  AppRouter([_i5.GlobalKey<_i5.NavigatorState>? navigatorKey])
-      : super(navigatorKey);
+  AppRouter([_i5.GlobalKey<_i5.NavigatorState>? navigatorKey]) : super(navigatorKey);
 
   @override
   final Map<String, _i4.PageFactory> pagesMap = {
     AuthWrapperRoute.name: (routeData) {
-      return _i4.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i1.AuthWrapperPage());
+      return _i4.MaterialPageX<dynamic>(routeData: routeData, child: const _i1.AuthWrapperPage());
     },
     LoginRoute.name: (routeData) {
-      return _i4.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i2.LoginPage());
+      return _i4.MaterialPageX<dynamic>(routeData: routeData, child: const _i2.LoginPage());
     },
     LandingRoute.name: (routeData) {
-      return _i4.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i2.LandingPage());
+      return _i4.MaterialPageX<dynamic>(routeData: routeData, child: const _i2.LandingPage());
     },
     HomeRoute.name: (routeData) {
-      return _i4.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i3.HomePage());
+      return _i4.MaterialPageX<dynamic>(routeData: routeData, child: const _i3.HomePage());
     }
   };
 
