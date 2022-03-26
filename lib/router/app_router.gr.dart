@@ -10,49 +10,69 @@
 //
 // ignore_for_file: type=lint
 
-import 'package:auto_route/auto_route.dart' as _i3;
-import 'package:flutter/material.dart' as _i4;
+import 'package:auto_route/auto_route.dart' as _i4;
+import 'package:flutter/material.dart' as _i5;
 
-import '../core/loading/loading_page.dart' as _i2;
-import '../features/welcome/landing_page.dart' as _i1;
+import '../features/login/login.dart' as _i2;
+import '../main.dart' as _i1;
+import 'app_router.dart' as _i3;
 
-class AppRouter extends _i3.RootStackRouter {
-  AppRouter([_i4.GlobalKey<_i4.NavigatorState>? navigatorKey])
-      : super(navigatorKey);
+class AppRouter extends _i4.RootStackRouter {
+  AppRouter([_i5.GlobalKey<_i5.NavigatorState>? navigatorKey]) : super(navigatorKey);
 
   @override
-  final Map<String, _i3.PageFactory> pagesMap = {
-    LandingRoute.name: (routeData) {
-      return _i3.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i1.LandingPage());
+  final Map<String, _i4.PageFactory> pagesMap = {
+    AuthWrapperRoute.name: (routeData) {
+      return _i4.MaterialPageX<dynamic>(routeData: routeData, child: const _i1.AuthWrapperPage());
     },
-    LoadingRoute.name: (routeData) {
-      return _i3.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i2.LoadingPage());
+    LoginRoute.name: (routeData) {
+      return _i4.MaterialPageX<dynamic>(routeData: routeData, child: const _i2.LoginPage());
+    },
+    LandingRoute.name: (routeData) {
+      return _i4.MaterialPageX<dynamic>(routeData: routeData, child: const _i2.LandingPage());
+    },
+    HomeRoute.name: (routeData) {
+      return _i4.MaterialPageX<dynamic>(routeData: routeData, child: const _i3.HomePage());
     }
   };
 
   @override
-  List<_i3.RouteConfig> get routes => [
-        _i3.RouteConfig('/#redirect',
-            path: '/', redirectTo: '/loading', fullMatch: true),
-        _i3.RouteConfig(LandingRoute.name, path: '/loading'),
-        _i3.RouteConfig(LoadingRoute.name, path: '/loading')
+  List<_i4.RouteConfig> get routes => [
+        _i4.RouteConfig(AuthWrapperRoute.name, path: '/'),
+        _i4.RouteConfig(LoginRoute.name, path: '/login'),
+        _i4.RouteConfig(LandingRoute.name, path: '/landing'),
+        _i4.RouteConfig(HomeRoute.name, path: '/home')
       ];
 }
 
 /// generated route for
-/// [_i1.LandingPage]
-class LandingRoute extends _i3.PageRouteInfo<void> {
-  const LandingRoute() : super(LandingRoute.name, path: '/loading');
+/// [_i1.AuthWrapperPage]
+class AuthWrapperRoute extends _i4.PageRouteInfo<void> {
+  const AuthWrapperRoute() : super(AuthWrapperRoute.name, path: '/');
+
+  static const String name = 'AuthWrapperRoute';
+}
+
+/// generated route for
+/// [_i2.LoginPage]
+class LoginRoute extends _i4.PageRouteInfo<void> {
+  const LoginRoute() : super(LoginRoute.name, path: '/login');
+
+  static const String name = 'LoginRoute';
+}
+
+/// generated route for
+/// [_i2.LandingPage]
+class LandingRoute extends _i4.PageRouteInfo<void> {
+  const LandingRoute() : super(LandingRoute.name, path: '/landing');
 
   static const String name = 'LandingRoute';
 }
 
 /// generated route for
-/// [_i2.LoadingPage]
-class LoadingRoute extends _i3.PageRouteInfo<void> {
-  const LoadingRoute() : super(LoadingRoute.name, path: '/loading');
+/// [_i3.HomePage]
+class HomeRoute extends _i4.PageRouteInfo<void> {
+  const HomeRoute() : super(HomeRoute.name, path: '/home');
 
-  static const String name = 'LoadingRoute';
+  static const String name = 'HomeRoute';
 }

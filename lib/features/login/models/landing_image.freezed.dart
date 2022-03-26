@@ -35,14 +35,12 @@ mixin _$LandingImage {
   double get opacity => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $LandingImageCopyWith<LandingImage> get copyWith =>
-      throw _privateConstructorUsedError;
+  $LandingImageCopyWith<LandingImage> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $LandingImageCopyWith<$Res> {
-  factory $LandingImageCopyWith(
-          LandingImage value, $Res Function(LandingImage) then) =
+  factory $LandingImageCopyWith(LandingImage value, $Res Function(LandingImage) then) =
       _$LandingImageCopyWithImpl<$Res>;
   $Res call({String imageUrl, double opacity});
 }
@@ -74,10 +72,8 @@ class _$LandingImageCopyWithImpl<$Res> implements $LandingImageCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$LandingImageCopyWith<$Res>
-    implements $LandingImageCopyWith<$Res> {
-  factory _$LandingImageCopyWith(
-          _LandingImage value, $Res Function(_LandingImage) then) =
+abstract class _$LandingImageCopyWith<$Res> implements $LandingImageCopyWith<$Res> {
+  factory _$LandingImageCopyWith(_LandingImage value, $Res Function(_LandingImage) then) =
       __$LandingImageCopyWithImpl<$Res>;
   @override
   $Res call({String imageUrl, double opacity});
@@ -86,8 +82,7 @@ abstract class _$LandingImageCopyWith<$Res>
 /// @nodoc
 class __$LandingImageCopyWithImpl<$Res> extends _$LandingImageCopyWithImpl<$Res>
     implements _$LandingImageCopyWith<$Res> {
-  __$LandingImageCopyWithImpl(
-      _LandingImage _value, $Res Function(_LandingImage) _then)
+  __$LandingImageCopyWithImpl(_LandingImage _value, $Res Function(_LandingImage) _then)
       : super(_value, (v) => _then(v as _LandingImage));
 
   @override
@@ -137,19 +132,15 @@ class _$_LandingImage implements _LandingImage {
 
   @override
   int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(imageUrl),
-      const DeepCollectionEquality().hash(opacity));
+      runtimeType, const DeepCollectionEquality().hash(imageUrl), const DeepCollectionEquality().hash(opacity));
 
   @JsonKey(ignore: true)
   @override
-  _$LandingImageCopyWith<_LandingImage> get copyWith =>
-      __$LandingImageCopyWithImpl<_LandingImage>(this, _$identity);
+  _$LandingImageCopyWith<_LandingImage> get copyWith => __$LandingImageCopyWithImpl<_LandingImage>(this, _$identity);
 }
 
 abstract class _LandingImage implements LandingImage {
-  factory _LandingImage({required String imageUrl, required double opacity}) =
-      _$_LandingImage;
+  factory _LandingImage({required String imageUrl, required double opacity}) = _$_LandingImage;
 
   @override
   String get imageUrl;
@@ -157,6 +148,5 @@ abstract class _LandingImage implements LandingImage {
   double get opacity;
   @override
   @JsonKey(ignore: true)
-  _$LandingImageCopyWith<_LandingImage> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$LandingImageCopyWith<_LandingImage> get copyWith => throw _privateConstructorUsedError;
 }
