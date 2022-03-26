@@ -16,5 +16,5 @@ class ImagePath {
       'https://images.unsplash.com/photo-1582298538104-fe2e74c27f59?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8';
 
   // * Authentication
-  static const kAuthAppBar = 'assets/authentication/appbar_image.svg';
+  static const kAuthAppBar = 'assets/login/appbar_image.svg';
 }

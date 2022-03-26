@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -18,7 +19,11 @@ class LoginPage extends StatelessWidget {
           const _AppBar(),
           Consumer(builder: (context, ref, child) {
             return TextButton(
-              onPressed: () => ref.read(firebaseAuthProvider).signInAnonymously(),
+              onPressed: () async {
+                // TODO: Facade for Auth
+                await ref.read(firebaseAuthProvider).signInAnonymously();
+                context.router.popUntilRoot();
+              },
               child: const Text('Sign In Anonymously'),
             );
           }),
