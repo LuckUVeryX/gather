@@ -588,6 +588,15 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.1"
+  logger:
+    dependency: "direct main"
+    description:
+      path: "."
+      ref: HEAD
+      resolved-ref: "6900de51c39152b751995ac03405d5c3df68001c"
+      url: "https://github.com/LuckUVeryX/logger.git"
+    source: git
+    version: "1.1.0"
   logging:
     dependency: transitive
     description:

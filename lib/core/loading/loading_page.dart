@@ -3,6 +3,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../utils/utils.dart';
+import '../widgets/widgets.dart';
 
 class LoadingPage extends StatelessWidget {
   const LoadingPage({Key? key}) : super(key: key);
@@ -19,20 +20,15 @@ class LoadingIndicator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final textTheme = Theme.of(context).textTheme;
-    final theme = Theme.of(context);
     return Stack(
       fit: StackFit.loose,
       alignment: Alignment.center,
-      children: [
+      children: const [
         Padding(
-          padding: const EdgeInsets.only(top: _space + _logoSize),
-          child: Text(
-            'gather',
-            style: textTheme.displaySmall?.copyWith(fontWeight: FontWeight.w800, color: theme.colorScheme.onPrimary),
-          ),
+          padding: EdgeInsets.only(top: _space + _logoSize),
+          child: AppTitle(),
         ),
-        const Padding(
+        Padding(
           padding: EdgeInsets.only(bottom: _space + _logoSize),
           child: AnimatedLoading(),
         ),

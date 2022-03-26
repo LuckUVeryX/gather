@@ -1,10 +1,12 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../core/utils/utils.dart';
-import '../../core/widgets/widgets.dart';
-import 'controllers/landing_image_notifier.dart';
+import '../../../core/utils/utils.dart';
+import '../../../core/widgets/widgets.dart';
+import '../../../router/router.dart';
+import 'landing_image_notifier.dart';
 
 class LandingPage extends StatelessWidget {
   const LandingPage({Key? key}) : super(key: key);
@@ -171,7 +173,7 @@ class _GetStartedButton extends StatelessWidget {
     return SizedBox(
       width: double.infinity,
       child: ElevatedButton(
-        onPressed: () {},
+        onPressed: () => context.router.push(const LoginRoute()),
         style: ElevatedButton.styleFrom(
           primary: theme.colorScheme.onPrimary,
           onPrimary: theme.colorScheme.primary,
@@ -192,7 +194,7 @@ class _LoginButton extends ConsumerWidget {
     final theme = Theme.of(context);
     final textTheme = theme.textTheme;
     return TextButton(
-      onPressed: () {},
+      onPressed: () => context.router.push(const LoginRoute()),
       child: Text('LOG IN', style: textTheme.button?.copyWith(color: theme.colorScheme.onPrimary)),
     );
   }
