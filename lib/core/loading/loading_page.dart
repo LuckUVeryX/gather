@@ -23,12 +23,12 @@ class LoadingIndicator extends StatelessWidget {
     return Stack(
       fit: StackFit.loose,
       alignment: Alignment.center,
-      children: const [
+      children: [
         Padding(
-          padding: EdgeInsets.only(top: _space + _logoSize),
-          child: AppTitle(),
+          padding: const EdgeInsets.only(top: _space + _logoSize),
+          child: AppTitle(color: Theme.of(context).colorScheme.onPrimary),
         ),
-        Padding(
+        const Padding(
           padding: EdgeInsets.only(bottom: _space + _logoSize),
           child: AnimatedLoading(),
         ),
