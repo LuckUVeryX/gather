@@ -7,8 +7,8 @@ import 'package:logger/logger.dart';
 
 import '../models/models.dart';
 
-// * Providers
 final authRepositoryProvider = Provider<AuthRepository>((ref) {
+  // ? FakeAuthRepository, FirebaseAuthRepository,
   return FakeAuthRepository();
 });
 
