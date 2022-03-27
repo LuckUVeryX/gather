@@ -45,7 +45,7 @@ class AnimatedLoading extends HookWidget {
     Key? key,
   }) : super(key: key);
 
-  static const duration = Duration(milliseconds: 5500);
+  static const duration = Duration(milliseconds: 2000);
 
   static const logoOffset = 0.39;
   static const calendarOffset = 0.135;
