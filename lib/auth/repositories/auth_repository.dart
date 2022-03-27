@@ -62,7 +62,7 @@ class FakeAuthRepository implements AuthRepository {
   late final StreamController<AuthStatus> _authController;
 
   static const _initialAuthStatus = AuthStatus.unauthenticated();
-  static const _maxDelayInMilliseconds = 5000;
+  static const _maxDelayInMilliseconds = 1000;
 
   @override
   Stream<AuthStatus> authStatus() {
