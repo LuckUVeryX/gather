@@ -3,18 +3,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'core/loading/loading_page.dart';
 import 'core/theme/theme.dart';
-import 'features/login/presentation/presentation.dart';
+import 'core/utils/utils.dart';
 import 'firebase_options.dart';
-import 'providers.dart';
 import 'router/router.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
-  runApp(ProviderScope(child: MyApp()));
+  runApp(ProviderScope(
+    child: MyApp(),
+    observers: [ProviderLogObserver(AppLogger())],
+  ));
 }
 
 class MyApp extends ConsumerWidget {
@@ -34,20 +35,6 @@ class MyApp extends ConsumerWidget {
       routerDelegate: _appRouter.delegate(
         navigatorObservers: () => [AppRouterObserver(appRouterLogger: log)],
       ),
-    );
-  }
-}
-
-class AuthWrapperPage extends ConsumerWidget {
-  const AuthWrapperPage({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final authStateChanges = ref.watch(authStateChangesProvider);
-    return authStateChanges.when(
-      data: (data) => data == null ? const LandingPage() : const HomePage(),
-      error: (_, __) => Scaffold(body: Center(child: Text('Error: $authStateChanges'))),
-      loading: () => const LoadingPage(),
     );
   }
 }
