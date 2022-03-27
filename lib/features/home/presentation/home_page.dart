@@ -1,47 +1,186 @@
-import 'package:auto_route/auto_route.dart';
+import 'dart:math';
+
+import 'package:badges/badges.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../router/router.dart';
-import 'presentation.dart';
+import '../../../core/widgets/gather_app_bar.dart';
 
-class HomePage extends ConsumerWidget {
+class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    ref.listen(signOutProgressNotifierProvider, (prev, next) {
-      if (prev is AsyncData && next is AsyncLoading) context.router.push(const LoadingRoute());
-    });
-
-    final signOutProgress = ref.watch(signOutProgressNotifierProvider);
-    return signOutProgress.when(
-      error: (e, _) => Text('Error $e'),
-      loading: () => const _HomeView(),
-      data: (_) => const _HomeView(),
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: const _HomeAppBar(),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          children: const [
+            _Greeting(),
+            SizedBox(height: 12.0),
+            _GatheringSearchTextField(),
+            SizedBox(height: 16.0),
+            _BalanceAndPointsDisplay(),
+            SizedBox(height: 8.0),
+            _DealsAndFavouritesDisplay(),
+          ],
+        ),
+      ),
     );
   }
 }
 
-class _HomeView extends StatelessWidget {
-  const _HomeView({
+class _HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
+  const _HomeAppBar({
     Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Consumer(builder: (context, ref, child) {
-          return ElevatedButton(
-            onPressed: () async {
-              await ref.read(signOutProgressNotifierProvider.notifier).signOut();
-              context.router.popUntilRoot();
-            },
-            child: const Text('Sign Out'),
-          );
-        }),
+    final theme = Theme.of(context);
+    return GatherAppBar(
+      actions: [
+        IconButton(
+          onPressed: () {},
+          icon: Badge(
+            badgeContent: Text(
+              (Random().nextInt(4) + 1).toString(),
+              style: TextStyle(color: theme.colorScheme.onPrimary),
+            ),
+            child: const Icon(CupertinoIcons.chat_bubble),
+          ),
+        ),
+      ],
+    );
+  }
+
+  @override
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
+}
+
+class _Greeting extends StatelessWidget {
+  const _Greeting({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final textTheme = theme.textTheme;
+    return FittedBox(
+      fit: BoxFit.scaleDown,
+      child: Text(
+        '\$TimedGreeting, \$Name 👋',
+        style: textTheme.headlineMedium?.copyWith(
+          fontWeight: FontWeight.w700,
+          color: theme.colorScheme.onSurface,
+        ),
       ),
+    );
+  }
+}
+
+class _GatheringSearchTextField extends HookConsumerWidget {
+  const _GatheringSearchTextField({Key? key}) : super(key: key);
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final controller = useTextEditingController();
+    return TextField(
+      controller: controller,
+      decoration: const InputDecoration(
+        prefixIcon: Icon(Icons.search),
+        hintText: 'Search for a gathering',
+      ),
+    );
+  }
+}
+
+class _BalanceAndPointsDisplay extends StatelessWidget {
+  const _BalanceAndPointsDisplay({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final textTheme = theme.textTheme;
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Expanded(
+          child: InputDecorator(
+            decoration: InputDecoration(
+              labelText: 'Balance',
+              suffixIcon: Icon(Icons.account_balance_wallet_outlined, color: theme.colorScheme.primary),
+            ),
+            child: FittedBox(
+              fit: BoxFit.scaleDown,
+              alignment: Alignment.centerLeft,
+              child: Text('XX,XXX', style: textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w700)),
+            ),
+          ),
+        ),
+        const SizedBox(width: 8.0),
+        Expanded(
+          child: InputDecorator(
+            decoration: InputDecoration(
+              labelText: 'Points',
+              suffixIcon: Icon(FontAwesomeIcons.award, color: theme.colorScheme.primary),
+            ),
+            child: FittedBox(
+              fit: BoxFit.scaleDown,
+              alignment: Alignment.centerLeft,
+              child: Text('XX,XXX', style: textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w700)),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class _DealsAndFavouritesDisplay extends StatelessWidget {
+  const _DealsAndFavouritesDisplay({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final textTheme = theme.textTheme;
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Expanded(
+          child: InputDecorator(
+            decoration: InputDecoration(
+              suffixIcon: Icon(CupertinoIcons.tag, color: theme.colorScheme.primary),
+            ),
+            child: FittedBox(
+              fit: BoxFit.scaleDown,
+              alignment: Alignment.centerLeft,
+              child: Text('Deals', style: textTheme.titleMedium),
+            ),
+          ),
+        ),
+        const SizedBox(width: 8.0),
+        Expanded(
+          child: InputDecorator(
+            decoration: InputDecoration(
+              suffixIcon: Icon(FontAwesomeIcons.heart, color: theme.colorScheme.primary),
+            ),
+            child: FittedBox(
+              fit: BoxFit.scaleDown,
+              alignment: Alignment.centerLeft,
+              child: Text('Favourites', style: textTheme.titleMedium),
+            ),
+          ),
+        ),
+      ],
     );
   }
 }
