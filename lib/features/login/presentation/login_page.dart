@@ -1,11 +1,10 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../../../core/loading/loading_page.dart';
 import '../../../core/utils/utils.dart';
 import '../../../core/widgets/widgets.dart';
-import '../../../router/router.dart';
 import 'presentation.dart';
 
 class LoginPage extends ConsumerWidget {
@@ -13,14 +12,10 @@ class LoginPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    ref.listen<AsyncValue<void>>(loginProgressNotifierProvider, (prev, next) {
-      if (prev is AsyncData && next is AsyncLoading) context.router.push(const LoadingRoute());
-    });
-
     final loginProgress = ref.watch(loginProgressNotifierProvider);
     return loginProgress.when(
       error: (e, _) => Text('Error: $e'),
-      loading: () => const _LoginView(),
+      loading: () => const LoadingPage(),
       data: (_) => const _LoginView(),
     );
   }
@@ -48,10 +43,7 @@ class _LoginView extends StatelessWidget {
               child: Consumer(
                 builder: (context, ref, child) {
                   return ElevatedButton(
-                    onPressed: () async {
-                      await ref.read(loginProgressNotifierProvider.notifier).signInAnonymously();
-                      context.router.popUntilRoot();
-                    },
+                    onPressed: () async => await ref.read(loginProgressNotifierProvider.notifier).signInAnonymously(),
                     child: child!,
                   );
                 },
