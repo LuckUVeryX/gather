@@ -1,65 +1,29 @@
-import 'dart:math';
-
-import 'package:badges/badges.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../core/widgets/gather_app_bar.dart';
-
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: const _HomeAppBar(),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: const [
-            _Greeting(),
-            SizedBox(height: 12.0),
-            _GatheringSearchTextField(),
-            SizedBox(height: 16.0),
-            _BalanceAndPointsDisplay(),
-            SizedBox(height: 8.0),
-            _DealsAndFavouritesDisplay(),
-          ],
-        ),
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: Column(
+        children: const [
+          _Greeting(),
+          SizedBox(height: 12.0),
+          _GatheringSearchTextField(),
+          SizedBox(height: 16.0),
+          _BalanceAndPointsDisplay(),
+          SizedBox(height: 8.0),
+          _DealsAndFavouritesDisplay(),
+        ],
       ),
     );
   }
-}
-
-class _HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const _HomeAppBar({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    return GatherAppBar(
-      actions: [
-        IconButton(
-          onPressed: () {},
-          icon: Badge(
-            badgeContent: Text(
-              (Random().nextInt(4) + 1).toString(),
-              style: TextStyle(color: theme.colorScheme.onPrimary),
-            ),
-            child: const Icon(CupertinoIcons.chat_bubble),
-          ),
-        ),
-      ],
-    );
-  }
-
-  @override
-  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 }
 
 class _Greeting extends StatelessWidget {

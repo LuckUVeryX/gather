@@ -26,4 +26,11 @@ final appTheme = ThemeData(colorScheme: colorScheme, fontFamily: 'SFProRounded')
     isDense: true,
     border: OutlineInputBorder(borderRadius: BorderRadius.circular(12.0), borderSide: BorderSide.none),
   ),
+  bottomNavigationBarTheme: BottomNavigationBarThemeData(
+    elevation: 2.0,
+    selectedItemColor: colorScheme.onSurface,
+    unselectedItemColor: colorScheme.onSurfaceVariant,
+    showUnselectedLabels: true,
+    type: BottomNavigationBarType.shifting,
+  ),
 );

@@ -17,4 +17,7 @@ class ImagePath {
 
   // * Authentication
   static const kAuthAppBar = 'assets/login/appbar_image.svg';
+
+  // ! Temp
+  static const tempProfile = 'assets/temp/profile.png';
 }
