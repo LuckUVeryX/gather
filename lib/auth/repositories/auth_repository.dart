@@ -62,13 +62,14 @@ class FakeAuthRepository implements AuthRepository {
   late final StreamController<AuthStatus> _authController;
 
   static const _initialAuthStatus = AuthStatus.unauthenticated();
-  static const _maxDelayInMilliseconds = 1000;
+  static const _maxDelayDeviation = 1000;
+  static const _minDelayInMilliseconds = 500;
 
   @override
   Stream<AuthStatus> authStatus() {
     _authController = StreamController<AuthStatus>(
       onListen: () async {
-        await Future.delayed(Duration(milliseconds: Random().nextInt(_maxDelayInMilliseconds)));
+        await _delay();
         _authController.add(_initialAuthStatus);
       },
     );
@@ -77,14 +78,18 @@ class FakeAuthRepository implements AuthRepository {
 
   @override
   Future<void> signInAnonymously() async {
-    await Future.delayed(Duration(milliseconds: Random().nextInt(_maxDelayInMilliseconds)));
+    await _delay();
     _authController.add(const AuthStatus.authenticated());
   }
 
   @override
   Future<void> signOut() async {
-    await Future.delayed(Duration(milliseconds: Random().nextInt(_maxDelayInMilliseconds)));
+    await _delay();
     _authController.add(const AuthStatus.unauthenticated());
+  }
+
+  Future<void> _delay() async {
+    await Future.delayed(Duration(milliseconds: _minDelayInMilliseconds + Random().nextInt(_maxDelayDeviation)));
   }
 }
 
