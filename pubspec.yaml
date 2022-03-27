@@ -10,6 +10,7 @@ environment:
 
 dependencies:
   auto_route: ^3.2.4
+  badges: ^2.0.2
   cached_network_image: ^3.2.0
   cupertino_icons: ^1.0.2
   firebase_auth: ^3.3.11
@@ -20,6 +21,7 @@ dependencies:
   flutter_native_splash: ^2.0.4
   flutter_svg: ^1.0.3
   flutterfire_ui: ^0.3.6+1
+  font_awesome_flutter: ^10.1.0
   freezed_annotation: ^1.1.0
   hooks_riverpod: ^1.0.3
   logger: 
