@@ -38,15 +38,25 @@ class _LoginView extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           const _AppBar(),
-          Consumer(builder: (context, ref, child) {
-            return TextButton(
-              onPressed: () async {
-                await ref.read(loginProgressNotifierProvider.notifier).signInAnonymously();
-                context.router.popUntilRoot();
-              },
-              child: const Text('Sign In Anonymously'),
-            );
-          }),
+          const Spacer(),
+          SafeArea(
+            child: Container(
+              margin: const EdgeInsets.symmetric(horizontal: 12.0),
+              width: double.infinity,
+              child: Consumer(
+                builder: (context, ref, child) {
+                  return ElevatedButton(
+                    onPressed: () async {
+                      await ref.read(loginProgressNotifierProvider.notifier).signInAnonymously();
+                      context.router.popUntilRoot();
+                    },
+                    child: child!,
+                  );
+                },
+                child: const Text('Sign in anonymously'),
+              ),
+            ),
+          ),
         ],
       ),
     );
@@ -60,13 +70,13 @@ class _AppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Container(
       margin: EdgeInsets.zero,
       width: double.infinity,
-      decoration: const BoxDecoration(
-        // color: theme.colorScheme.onPrimary,
-        color: Colors.black,
-        borderRadius: BorderRadius.only(
+      decoration: BoxDecoration(
+        color: theme.colorScheme.onPrimary,
+        borderRadius: const BorderRadius.only(
           bottomLeft: Radius.circular(32.0),
           bottomRight: Radius.circular(32.0),
         ),
