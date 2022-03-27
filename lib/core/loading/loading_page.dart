@@ -11,7 +11,10 @@ class LoadingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final backgroundColor = Theme.of(context).primaryColor;
-    return Scaffold(backgroundColor: backgroundColor, body: const Center(child: LoadingIndicator()));
+    return WillPopScope(
+      onWillPop: () async => false,
+      child: Scaffold(backgroundColor: backgroundColor, body: const Center(child: LoadingIndicator())),
+    );
   }
 }
 

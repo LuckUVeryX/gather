@@ -5,10 +5,31 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../core/utils/utils.dart';
 import '../../../core/widgets/widgets.dart';
-import '../../../providers.dart';
+import '../../../router/router.dart';
+import 'presentation.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends ConsumerWidget {
   const LoginPage({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    ref.listen<AsyncValue<void>>(loginProgressNotifierProvider, (prev, next) {
+      if (prev is AsyncData && next is AsyncLoading) context.router.push(const LoadingRoute());
+    });
+
+    final loginProgress = ref.watch(loginProgressNotifierProvider);
+    return loginProgress.when(
+      error: (e, _) => Text('Error: $e'),
+      loading: () => const _LoginView(),
+      data: (_) => const _LoginView(),
+    );
+  }
+}
+
+class _LoginView extends StatelessWidget {
+  const _LoginView({
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,8 +41,7 @@ class LoginPage extends StatelessWidget {
           Consumer(builder: (context, ref, child) {
             return TextButton(
               onPressed: () async {
-                // TODO: Facade for Auth
-                await ref.read(firebaseAuthProvider).signInAnonymously();
+                await ref.read(loginProgressNotifierProvider.notifier).signInAnonymously();
                 context.router.popUntilRoot();
               },
               child: const Text('Sign In Anonymously'),
