@@ -14,7 +14,7 @@ class AuthWrapperPage extends ConsumerWidget {
     final authStatus = ref.watch(authStatusProvider);
     return authStatus.when<Widget>(
       data: (auth) => auth.when<Widget>(
-        authenticated: () => const HomePage(),
+        authenticated: () => const HomeWrapperPage(),
         unauthenticated: () => const LandingPage(),
       ),
       error: (_, __) => Scaffold(body: Center(child: Text('Error: $authStatus'))),
